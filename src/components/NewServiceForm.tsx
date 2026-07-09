@@ -19,7 +19,7 @@ export function NewServiceForm(props: NewServiceFormProps) {
                     onChange={(e) => setNomeCliente(e.target.value)}
                     placeholder="Nome do Cliente"
                 />
-                <p>Nome do Cliente: {nomeCliente}</p>
+                
 
                 <input
                     type="text"
@@ -27,7 +27,7 @@ export function NewServiceForm(props: NewServiceFormProps) {
                     onChange={(e) => setModeloAparelho(e.target.value)}
                     placeholder="Modelo do Aparelho"
                 />
-                <p>Modelo do Aparelho: {modeloAparelho}</p>
+                
 
                 <input
                     type="text"
@@ -35,7 +35,7 @@ export function NewServiceForm(props: NewServiceFormProps) {
                     onChange={(e) => setDefeito(e.target.value)}
                     placeholder="Defeito do Aparelho"
                 />
-                <p>Defeito do Aparelho: {defeito}</p> 
+                
 
                 <button onClick={()=>{props.onSalvar({
                     id: Date.now(),

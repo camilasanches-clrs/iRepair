@@ -12,8 +12,8 @@ export function NewServiceForm(props: NewServiceFormProps) {
     const [defeito, setDefeito] = useState("")
     const [status, setStatus] = useState<Status>("aberto")
     return(
-        <div>
-                <input
+        <div className="bg-white shadow-md rounded p-4 mb-4">
+                <input className="border border-gray-300 rounded p-2 w-full mb-3"
                     type="text"
                     value = {nomeCliente}
                     onChange={(e) => setNomeCliente(e.target.value)}
@@ -21,7 +21,7 @@ export function NewServiceForm(props: NewServiceFormProps) {
                 />
                 
 
-                <input
+                <input className="border border-gray-300 rounded p-2 w-full mb-3"
                     type="text"
                     value = {modeloAparelho}
                     onChange={(e) => setModeloAparelho(e.target.value)}
@@ -29,7 +29,7 @@ export function NewServiceForm(props: NewServiceFormProps) {
                 />
                 
 
-                <input
+                <input className="border border-gray-300 rounded p-2 w-full mb-3"
                     type="text"
                     value = {defeito}
                     onChange={(e) => setDefeito(e.target.value)}
@@ -37,7 +37,7 @@ export function NewServiceForm(props: NewServiceFormProps) {
                 />
                 
 
-                <button onClick={()=>{props.onSalvar({
+                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onClick={()=>{props.onSalvar({
                     id: Date.now(),
                     nomeCliente: nomeCliente,
                     modeloAparelho: modeloAparelho,

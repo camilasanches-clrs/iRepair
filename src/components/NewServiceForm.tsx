@@ -37,14 +37,20 @@ export function NewServiceForm(props: NewServiceFormProps) {
                 />
                 
 
-                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onClick={()=>{props.onSalvar({
+                <button className="bg-slate-700 text-white px-4 py-2 rounded hover:bg-blue-600" onClick={()=>{props.onSalvar({
                     id: Date.now(),
                     nomeCliente: nomeCliente,
                     modeloAparelho: modeloAparelho,
                     defeito: defeito,
                     status: status
 
-                })}}>Salvar</button>
+                })
+                    setNomeCliente("")
+                    setModeloAparelho("")
+                    setDefeito("")
+                    setStatus("aberto")
+
+                }}>Salvar</button>
 
         </div>
         

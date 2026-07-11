@@ -35,11 +35,11 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="p-6">
       <Header />
       <NewServiceForm  onSalvar={adicionarOrdem} />
 
-      <div className="flex flex-row gap-4">
+      <div className="p-8 flex flex-row gap-8 ">
       <StatusColumn ordens={ordens} status="aberto" titulo="Ordens Abertas" mudarStatus={mudarStatus} apagarOrdem={apagarOrdem}/>
       <StatusColumn ordens={ordens} status="em_andamento" titulo="Ordens em Andamento" mudarStatus={mudarStatus} apagarOrdem={apagarOrdem}/>
       <StatusColumn ordens={ordens} status="concluido" titulo="Ordens Concluídas" mudarStatus={mudarStatus} apagarOrdem={apagarOrdem}/>

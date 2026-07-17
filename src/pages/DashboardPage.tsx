@@ -1,5 +1,5 @@
 
-import type { ServiceOrder } from '../types/ServiceOrder'
+import type { ServiceOrder, Status } from '../types/ServiceOrder'
 import { useState, useEffect } from 'react'
 import { api } from '../services/api'
 import type { Client } from '../types/Client'
@@ -27,6 +27,26 @@ export const DashboardPage = () => {
         return(
             <p>Loading...</p>
         )
+    }
+
+    const getClientName = (clientId: number) => {
+        const client = clients.find(client => client.id === clientId);
+        return client ? client.name : 'Unknown Client';
+    }
+    async function changeStatus(id: number, newStatus: Status) {
+        const order = serviceOrders.find(order => order.id === id);
+        if (!order) return;
+
+        await api.put(`/api/service-orders/${id}` , {
+            clientId: order.client_id,
+            device: order.device,
+            issue: order.issue,
+            status: newStatus
+        });
+        
+        setServiceOrders(prevOrders => prevOrders.map(order => order.id === id ? { ...order, status: newStatus } : order));
+        
+
     }
     return (
         <div>

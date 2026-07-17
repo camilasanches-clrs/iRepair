@@ -14,10 +14,27 @@ export const ClientsPage = () =>{
 
         fetchClients();
     }, []);
+
+    async function deleteClient (id:number){
+        await api.delete(`/api/clients/${id}`);
+        setClients (prevClients => prevClients.filter(client => client.id !== id))
+
+    }
     
     return(
         <div>
             <h1>Clients</h1>
+        
+
+        {clients.map(client => (
+            <div key={client.id}>
+                <p>{client.name}</p>
+                <button onClick={() => deleteClient(client.id)}>
+                    Delete
+                </button>
+            </div>
+        ))}
+
         </div>
     )
 }

@@ -1,10 +1,18 @@
-export type Status = 'aberto' | 'em andamento' | 'concluido';
+
+export type Status = 'open' | 'in_progress' | 'done';
 
 export interface ServiceOrder {
     id: number;
-    nomeCliente: string;
-    modeloAparelho: string;
-    defeito: string;
+    client_id: number;
+    device: string;
+    issue: string;
     status: Status;
+    created_at: string;
 }
- 
+
+export interface NewServiceOrder {
+    clientId: number;
+    device: string;
+    issue: string;
+    status?: Status;
+}

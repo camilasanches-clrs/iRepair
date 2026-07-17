@@ -3,6 +3,7 @@ import type { ServiceOrder, Status } from '../types/ServiceOrder'
 import { useState, useEffect } from 'react'
 import { api } from '../services/api'
 import type { Client } from '../types/Client'
+import { StatusColumn} from '../components/StatusColumn'
 
 
 export const DashboardPage = () => {
@@ -48,9 +49,39 @@ export const DashboardPage = () => {
         
 
     }
+
+    async function deleteOrder(id: number) {
+        await api.delete(`/api/service-orders/${id}`);
+        setServiceOrders(prevOrders => prevOrders.filter(order => order.id !== id));
+    }
     return (
         <div>
             <h1>Dashboard</h1>
+            <StatusColumn
+                serviceOrders={serviceOrders}
+                status="open"
+                title="Abertas"
+                changeStatus={changeStatus}
+                deleteOrder={deleteOrder}
+                getClientName={getClientName}
+            />
+            <StatusColumn
+                serviceOrders={serviceOrders}
+                status="in_progress"
+                title="Em Progresso"
+                changeStatus={changeStatus}
+                deleteOrder={deleteOrder}
+                getClientName={getClientName}
+            />
+            <StatusColumn
+                serviceOrders={serviceOrders}
+                status="done"
+                title="Concluídas"
+                changeStatus={changeStatus}
+                deleteOrder={deleteOrder}
+                getClientName={getClientName}
+            />
+
         </div>
     )
 }

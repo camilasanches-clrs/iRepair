@@ -1,33 +1,33 @@
 import type { Status } from '../types/ServiceOrder';
 interface ServiceCardProps {
     id: number;
-    nomeCliente: string;
-    modeloAparelho: string;
-    defeito: string;
+    nameClient: string;
+    device: string;
+    issue: string;
     status: Status;
-    mudarStatus: (id: number, novoStatus: Status) => void;
-    apagarOrdem: (id: number) => void;
+    changeStatus: (id: number, newStatus: Status) => void;
+    deleteOrder: (id: number) => void;
 }
 
 
 
-export function ServiceCard(props: ServiceCardProps) {
+export const ServiceCard = (props: ServiceCardProps) => {
 
-    function proximoStatus(): Status{
-        if (props.status === "aberto") {
-            return "em_andamento";
+    function nextStatus(): Status{
+        if (props.status === "open") {
+            return "in_progress";
         }
 
-        return "concluido";
+        return "done";
  
     }
 
-    function acaoBotao() {
-            if (props.status === "concluido") {
-            props.apagarOrdem(props.id);
+    function buttonAction() {
+            if (props.status === "done") {
+            props.deleteOrder(props.id);
         }
         else{
-            props.mudarStatus(props.id, proximoStatus());
+            props.changeStatus(props.id, nextStatus());
         }
 
     }
@@ -35,16 +35,16 @@ export function ServiceCard(props: ServiceCardProps) {
     
     return(
         <div className="bg-white shadow-md rounded p-4 mb-4">
-            <h2 className="text-lg font-bold mb-2">{props.nomeCliente}</h2>
-            <p className="mb-1"><strong>Modelo do Aparelho: </strong> {props.modeloAparelho}</p>
-            <p className="mb-1"><strong>Defeito: </strong> {props.defeito}</p>
+            <h2 className="text-lg font-bold mb-2">{props.nameClient}</h2>
+            <p className="mb-1"><strong>Device: </strong> {props.device}</p>
+            <p className="mb-1"><strong>Issue: </strong> {props.issue}</p>
             <p className="mb-1"><strong>Status: </strong> 
-            <span className= {`px-2 py-1 rounded-full text-xs font-semibold ${props.status === 'aberto' ? 'bg-red-200 text-red-800' : props.status === 'em_andamento' ? 'bg-yellow-200 text-yellow-800' : 'bg-green-200 text-green-800'}`}>{props.status}</span>
+            <span className= {`px-2 py-1 rounded-full text-xs font-semibold ${props.status === 'open' ? 'bg-red-200 text-red-800' : props.status === 'in_progress' ? 'bg-yellow-200 text-yellow-800' : 'bg-green-200 text-green-800'}`}>{props.status}</span>
             </p>
 
 
-            <button className="mt-3 bg-slate-700 text-white px-4 py-2 rounded hover:bg-blue-600" onClick={acaoBotao}>
-                {props.status === "concluido" ? "Apagar" : "Mudar status"}
+            <button className="mt-3 bg-slate-700 text-white px-4 py-2 rounded hover:bg-blue-600" onClick={buttonAction}>
+                {props.status === "done" ? "Delete" : "Change Status"}
             </button>
 
         </div>

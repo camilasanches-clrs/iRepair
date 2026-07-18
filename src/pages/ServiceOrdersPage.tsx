@@ -46,6 +46,12 @@ export const ServiceOrdersPage = () => {
         setServiceOrders(prevOrders => prevOrders.filter(order => order.id !== id));
     }
 
+    const getClientName = (clientId: number) => {
+        const client = clients.find(client => client.id === clientId);
+        return client ? client.name : 'Unknown Client';
+    }
+
+
     if (loading) {
         return (
             <p>Loading...</p>
@@ -55,29 +61,49 @@ export const ServiceOrdersPage = () => {
         <div>
             <h1>Service Orders</h1>
 
-            <select value={clientId} onChange={(e) => setClientId(e.target.value)}>
-                <option value="">Select a client</option>
-                {clients.map((client) => (
-                    <option key={client.id} value={client.id}>
-                        {client.name}
-                    </option>
-                ))}
-            </select>
+            <div className="bg-white shadow-md rounded p-4 mb-4">
+                <select
+                    value={clientId}
+                    onChange={(e) => setClientId(e.target.value)}
+                    className="border border-gray-300 rounded p-2 w-full mb-3"
+                >
+                    <option value="">Select a client</option>
+                    {clients.map((client) => (
+                        <option key={client.id} value={client.id}>
+                            {client.name}
+                        </option>
+                    ))}
+                </select>
 
-            <input value={device} onChange= {(e) => setDevice(e.target.value)} placeholder="Device"/>
-            <input value={issue} onChange= {(e) => setIssue(e.target.value)} placeholder="Issue"/>
+                <input
+                    value={device}
+                    onChange={(e) => setDevice(e.target.value)}
+                    placeholder="Device"
+                    className="border border-gray-300 rounded p-2 w-full mb-3"
+                />
+                <input
+                    value={issue}
+                    onChange={(e) => setIssue(e.target.value)}
+                    placeholder="Issue"
+                    className="border border-gray-300 rounded p-2 w-full mb-3"
+                />
 
-            <button onClick={createOrder}>Save</button>
-
-
+                <button 
+                onClick={createOrder}
+                className="bg-slate-700 text-white px-4 py-2 rounded hover:bg-blue-600"
+                >
+                    Save
+                </button>
+            </div>
 
 
             {serviceOrders.map(order => (
-            <div key={order.id}>
+            <div key={order.id} className= "bg-white shadow-md rounded p-4 mb-4 flex justify-between items-center">
+                <p className="text-lg font-bold">{getClientName(order.client_id)}</p>
                 <p>{order.device}</p>
                 <p>{order.issue}</p>
                 <p>{order.id}</p>
-                <button onClick={() => deleteOrder(order.id)}>
+                <button onClick={() => deleteOrder(order.id)}  className= "bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
                     Delete
                 </button>
             </div>

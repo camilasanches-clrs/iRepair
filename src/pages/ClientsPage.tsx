@@ -51,17 +51,25 @@ export const ClientsPage = () =>{
         <div>
             <h1>Clients</h1>
 
-            <input value ={name} onChange= {(e) => setName(e.target.value)} placeholder ="Name"/>
-            <input value={email} onChange= {(e) => setEmail(e.target.value)} placeholder="Email"/>
-            <input value={phone} onChange={(e)=> setPhone(e.target.value)} placeholder="Phone"/>
+            <div className="bg-white shadow-md rounded p-4 mb-4">
 
-            <button onClick={createClient}>Save</button>
-        
+            <input className="border border-gray-300 rounded p-2 w-full mb-3"  value ={name} onChange= {(e) => setName(e.target.value)} placeholder ="Name" />
+            <input className="border border-gray-300 rounded p-2 w-full mb-3" value={email} onChange= {(e) => setEmail(e.target.value)} placeholder="Email"/>
+            <input className="border border-gray-300 rounded p-2 w-full mb-3" value={phone} onChange={(e)=> setPhone(e.target.value)} placeholder="Phone"/>
+
+            <button onClick={createClient} className="bg-slate-700 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Save
+            </button>
+            
+            </div>
 
         {clients.map(client => (
-            <div key={client.id}>
-                <p>{client.name}</p>
-                <button onClick={() => deleteClient(client.id)}>
+            <div key={client.id} className="bg-white shadow-md rounded p-4 mb-4 flex justify-between items-center">
+                <p className="text-lg font-bold">{client.name}</p>
+                <p>{client.email}</p>
+                <p>{client.phone}</p>
+                <p>{client.id}</p>
+                <button onClick={() => deleteClient(client.id)} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
                     Delete
                 </button>
             </div>

@@ -5,6 +5,9 @@ import { useEffect } from "react";
 
 export const ClientsPage = () =>{
     const [clients, setClients] = useState<Client[]>([]);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
 
     useEffect(() => {
         async function fetchClients() {
@@ -21,9 +24,30 @@ export const ClientsPage = () =>{
 
     }
     
+    async function createClient (){
+        const response = await api.post('/api/clients',{
+            name: name,
+            email: email,
+            phone: phone
+            
+        });
+
+        setClients (prevClients => [...prevClients, response.data])
+        setName('');
+        setEmail('');
+        setPhone('');
+    }
+
+
     return(
         <div>
             <h1>Clients</h1>
+
+            <input value ={name} onChange= {(e) => setName(e.target.value)} placeholder ="Name"/>
+            <input value={email} onChange= {(e) => setEmail(e.target.value)} placeholder="Email"/>
+            <input value={phone} onChange={(e)=> setPhone(e.target.value)} placeholder="Phone"/>
+
+            <button onClick={createClient}>Save</button>
         
 
         {clients.map(client => (

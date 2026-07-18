@@ -60,7 +60,7 @@ export const DashboardPage = () => {
             <StatusColumn
                 serviceOrders={serviceOrders}
                 status="open"
-                title="Abertas"
+                title="Open"
                 changeStatus={changeStatus}
                 deleteOrder={deleteOrder}
                 getClientName={getClientName}
@@ -68,7 +68,7 @@ export const DashboardPage = () => {
             <StatusColumn
                 serviceOrders={serviceOrders}
                 status="in_progress"
-                title="Em Progresso"
+                title="In Progress"
                 changeStatus={changeStatus}
                 deleteOrder={deleteOrder}
                 getClientName={getClientName}
@@ -76,7 +76,7 @@ export const DashboardPage = () => {
             <StatusColumn
                 serviceOrders={serviceOrders}
                 status="done"
-                title="Concluídas"
+                title="Done"
                 changeStatus={changeStatus}
                 deleteOrder={deleteOrder}
                 getClientName={getClientName}

@@ -8,12 +8,15 @@ export const ClientsPage = () =>{
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchClients() {
             const response = await api.get('/api/clients');
             setClients(response.data);
+            setLoading(false);
         }
+        
 
         fetchClients();
     }, []);
@@ -38,6 +41,11 @@ export const ClientsPage = () =>{
         setPhone('');
     }
 
+    if (loading) {
+        return (
+            <p>Loading...</p>
+        )
+    }
 
     return(
         <div>

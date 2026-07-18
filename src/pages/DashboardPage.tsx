@@ -26,7 +26,9 @@ export const DashboardPage = () => {
     
     if(loading) {
         return(
-            <p>Loading...</p>
+            <div className="flex items-center justify-center h-[60vh]">
+                    <p className="text-gray-500 text-xl">Loading...</p>
+            </div>
         )
     }
 
@@ -55,8 +57,10 @@ export const DashboardPage = () => {
         setServiceOrders(prevOrders => prevOrders.filter(order => order.id !== id));
     }
     return (
-        <div>
-            <h1>Dashboard</h1>
+        <div className="p-6">
+            <h1 className="text-2xl font-bold mb-6 text-center">Dashboard</h1>
+
+            <div className="flex flex-row gap-8">
             <StatusColumn
                 serviceOrders={serviceOrders}
                 status="open"
@@ -81,6 +85,7 @@ export const DashboardPage = () => {
                 deleteOrder={deleteOrder}
                 getClientName={getClientName}
             />
+            </div>
 
         </div>
     )

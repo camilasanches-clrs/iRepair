@@ -43,13 +43,15 @@ export const ClientsPage = () =>{
 
     if (loading) {
         return (
-            <p>Loading...</p>
+            <div className="flex items-center justify-center h-[60vh]">
+                    <p className="text-gray-500 text-xl">Loading...</p>
+            </div>
         )
     }
 
     return(
         <div>
-            <h1>Clients</h1>
+            <h1 className="text-2xl font-bold mb-6 text-center" >Clients</h1>
 
             <div className="bg-white shadow-md rounded p-4 mb-4">
 

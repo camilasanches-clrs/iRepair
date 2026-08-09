@@ -4,6 +4,9 @@ import cookieParser from "cookie-parser";
 import "dotenv/config"
 import authRoutes from "./routes/auth.routes";
 import { authenticateToken } from "./middlewares/auth.Middleware";
+import clientRoutes from "./routes/client.routes";
+import serviceOrderRoutes from "./routes/serviceorder.routes"
+
 
 const app = express();
 
@@ -12,7 +15,8 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/auth", authRoutes);
-
+app.use("/clients", clientRoutes);
+app.use("/serviceorders", serviceOrderRoutes);
 
 
 

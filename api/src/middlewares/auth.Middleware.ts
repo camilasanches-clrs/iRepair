@@ -9,12 +9,12 @@ export function authenticateToken(req: Request, res: Response, next: NextFunctio
     return;
   }
 
-  jwt.verify(token, process.env.JWT_SECRET as string, (err, user) => {
+  jwt.verify(token, process.env.JWT_SECRET as string, (err: jwt.VerifyErrors | null, decoded: jwt.JwtPayload | string | undefined) => {
     if (err) {
       res.status(403).json({ message: "Token inválido." });
       return;
     }
-    req.user = user;
+    req.user = decoded as jwt.JwtPayload;
     next();
   });
 }

@@ -3,7 +3,7 @@ import { Header } from './components/Header'
 import { DashboardPage } from './pages/DashboardPage'
 import { ClientsPage } from './pages/ClientsPage'
 import { ServiceOrdersPage } from './pages/ServiceOrdersPage'
-
+import { PrivateRoute } from './components/PrivateRoute'
 import './App.css'
 import { LoginPage } from './pages/LoginPage'
 
@@ -17,10 +17,11 @@ export const App = () => {
           <Outlet />
         </div>
       }>
-
-        <Route path="/" element={<DashboardPage />} />
-        <Route path="/clients" element={<ClientsPage />} />
-        <Route path="/service-orders" element={<ServiceOrdersPage />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/clients" element={<ClientsPage />} />
+          <Route path="/service-orders" element={<ServiceOrdersPage />} />
+        </Route>
       </Route>
     </Routes>
   )

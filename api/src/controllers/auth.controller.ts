@@ -26,3 +26,31 @@ export async function login(req: Request, res: Response): Promise<void> {
         res.status(401).json({ message: "Credenciais inválidas", error });
     }
 }
+
+export async function me(req: Request, res: Response): Promise<void> {
+    const userId = req.user?.userId;
+
+    if (!userId) {
+        res.status(401).json({ message: "Usuário não autenticado" });
+        return;
+    }
+
+    try {
+        const user = await authService.findUserById(userId);
+        if (!user) {
+            res.status(404).json({ message: "Usuário não encontrado" });
+            return;
+        }
+        const { password: _, ...userWithoutPassword } = user;
+        res.json(userWithoutPassword);
+    }
+    catch (error) {
+        res.status(500).json({ message: "Erro ao buscar usuário", error });
+    }
+}
+
+export async function logout(req: Request, res: Response): Promise<void> {
+    res.clearCookie("token");
+    res.status(200).json({ message: "Logout realizado com sucesso"});
+    
+}

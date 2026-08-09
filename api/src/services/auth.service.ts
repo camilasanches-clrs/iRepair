@@ -44,3 +44,10 @@ export async function loginUser(email: string, password: string): Promise< strin
     return token;
 }
 
+export async function findUserById (id: number): Promise<User | null> {
+    return await prisma.user.findUnique({
+        where: {
+            id
+        },
+    })
+}

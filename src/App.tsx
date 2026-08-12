@@ -1,55 +1,32 @@
-import { useState } from 'react'
-import type { ServiceOrder, Status } from './types/ServiceOrder'
+import { Routes, Route, Outlet } from 'react-router-dom'
 import { Header } from './components/Header'
-import { NewServiceForm } from './components/NewServiceForm'
-import { ServiceCard } from './components/ServiceCard'
-import { StatusColumn } from './components/StatusColumn'
- 
+import { DashboardPage } from './pages/DashboardPage'
+import { ClientsPage } from './pages/ClientsPage'
+import { ServiceOrdersPage } from './pages/ServiceOrdersPage'
+import { PrivateRoute } from './components/PrivateRoute'
 import './App.css'
+import { LoginPage } from './pages/LoginPage'
+import { RegisterPage } from './pages/RegisterPage'
 
-
-
-function App() {
-  const [ordens, setOrdens] = useState<ServiceOrder[]>([])
-  function adicionarOrdem(novaOrdem: ServiceOrder) {
-    setOrdens((ordensAtuais) => [...ordensAtuais, novaOrdem])
-  }
-
-
-  function mudarStatus(id: number, novoStatus: Status) {
-        setOrdens((ordensAtuais) =>
-        ordensAtuais.map((ordem) => {
-            if (ordem.id === id) {
-                return { ...ordem, status: novoStatus };
-            }
-            return ordem;
-        })
-    )
-  }
-
-  function apagarOrdem(id: number) {
-    setOrdens((ordensAtuais) =>
-      ordensAtuais.filter((ordem) => ordem.id !== id)
-    )
-
-  }
-
+export const App = () => {
   return (
-    <div className="p-6">
-      <Header />
-      <NewServiceForm  onSalvar={adicionarOrdem} />
-
-      <div className="p-8 flex flex-row gap-8 ">
-      <StatusColumn ordens={ordens} status="aberto" titulo="Ordens Abertas" mudarStatus={mudarStatus} apagarOrdem={apagarOrdem}/>
-      <StatusColumn ordens={ordens} status="em_andamento" titulo="Ordens em Andamento" mudarStatus={mudarStatus} apagarOrdem={apagarOrdem}/>
-      <StatusColumn ordens={ordens} status="concluido" titulo="Ordens Concluídas" mudarStatus={mudarStatus} apagarOrdem={apagarOrdem}/>
-      </div>
-
-    </div>
-
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route element={
+        <div>
+          <Header />
+          <Outlet />
+        </div>
+      }>
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/clients" element={<ClientsPage />} />
+          <Route path="/service-orders" element={<ServiceOrdersPage />} />
+        </Route>
+      </Route>
+    </Routes>
   )
 }
-
-
 
 export default App

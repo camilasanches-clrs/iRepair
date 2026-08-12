@@ -6,11 +6,13 @@ import { ServiceOrdersPage } from './pages/ServiceOrdersPage'
 import { PrivateRoute } from './components/PrivateRoute'
 import './App.css'
 import { LoginPage } from './pages/LoginPage'
+import { RegisterPage } from './pages/RegisterPage'
 
 export const App = () => {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
       <Route element={
         <div>
           <Header />
